@@ -1,2 +1,2 @@
 #!/bin/bash
-for SSID in $(nmcli -g NAME connection show); do echo "$SSID": $(nmcli -s -g 802-11-wireless-security.psk connection show "${SSID}"); done
+nmcli -g NAME connection show | xargs -d '\n' sh -c 'for arg do echo "$arg": $(nmcli -s -g 802-11-wireless-security.psk connection show "$arg"); done'
